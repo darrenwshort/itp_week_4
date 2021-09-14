@@ -1,0 +1,3 @@
+# ignore data files
+*.xls
+.DS_Store
