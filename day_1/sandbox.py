@@ -27,22 +27,27 @@ sheet.title = "Asset ROI Data"
 
 # write column headers and set font style.
 sheet['A1'] = "Asset"
-sheet['A1'].font = Font(size="14", bold=True, italic=True)
+sheet['A1'].font = Font(size="14", bold=True, italic=True, underline="single")
 sheet['B1'] = "ROI Data"
-sheet['B1'].font = Font(size="14", bold=True, italic=True)
+sheet['B1'].font = Font(size="14", bold=True, italic=True, underline="single")
 
 
 # create counter for row
 row = 2
 
-# loop through asset list and retrieve 
+# loop through asset list and retrieve - 'asset' is asset symbol (string)
 for asset in assets:
  
+    # build url for subsequent request per each asset.
     url = f"https://data.messari.io/api/v1/assets/{asset['symbol'].lower()}/metrics"
+
+    # get response based on url.
     response_asset = requests.get(url)
+
+    # load json from response str.
     json_asset = json.loads(response_asset.text)
 
-    # try-except - some assets don't have ROI data.  Assign 'N/A' if so.
+    # try-except - some assets don't have ROI data.  If so, assign default of 'N/A' to 'roi_data'.
     try:
         roi_data = json_asset['data']['roi_data']['percent_change_last_1_week']
     except:
@@ -52,7 +57,7 @@ for asset in assets:
     sheet['A' + str(row)] = asset['symbol']
     sheet['B' + str(row)] = roi_data
 
-    # increment to next row
+    # increment to process next row.
     row += 1
 
 # save .xlsx file
