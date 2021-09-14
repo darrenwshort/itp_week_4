@@ -1,11 +1,9 @@
-# sandbox for breakout rooms
+# sandbox for breakout rooms 9/13/21
 
-
-import os
 import requests
 import json
-import openpyxl
-import pprint
+from openpyxl import Workbook
+from openpyxl.styles import Font
 
 response = requests.get("https://data.messari.io/api/v2/assets")
 
@@ -16,9 +14,26 @@ json_data = json.loads(response.text)
 
 # grab only 'data' ( asset list) from json_data. 
 assets = json_data['data']
-# for a in assets:
-#     print(a['symbol'])
 
+# create workbook object
+wb = Workbook()
+
+# create output file
+out_file = 'bitcoin.xlsx'
+
+# grab 'active' sheet, whichever it is
+sheet = wb.active
+sheet.title = "Asset ROI Data"
+
+# write column headers and set font style.
+sheet['A1'] = "Asset"
+sheet['A1'].font = Font(size="14", bold=True, italic=True)
+sheet['B1'] = "ROI Data"
+sheet['B1'].font = Font(size="14", bold=True, italic=True)
+
+
+# create counter for row
+row = 2
 
 # loop through asset list and retrieve 
 for asset in assets:
@@ -33,16 +48,15 @@ for asset in assets:
     except:
         roi_data = "N/A"
 
-    print(f"{asset['symbol'].lower()}: {roi_data}")
+    # assign values to cells.
+    sheet['A' + str(row)] = asset['symbol']
+    sheet['B' + str(row)] = roi_data
 
+    # increment to next row
+    row += 1
 
-# get list of all symbols in data list
-
-
-
-# print(type(data))
-# print(data)
-
+# save .xlsx file
+wb.save(out_file)
 
 
 
