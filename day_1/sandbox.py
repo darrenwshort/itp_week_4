@@ -48,6 +48,7 @@ for asset in assets:
     json_asset = json.loads(response_asset.text)
 
     # try-except - some assets don't have ROI data.  If so, assign default of 'N/A' to 'roi_data'.
+    # for ROI data, I am only grabbing one value -> 'percent_change_last_1_week'.
     try:
         roi_data = json_asset['data']['roi_data']['percent_change_last_1_week']
     except:
