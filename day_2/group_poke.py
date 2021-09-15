@@ -18,6 +18,7 @@ import requests
 from requests.api import request
 from pprint import pprint
 
+# clear output screen before each run.
 os.system('clear')
 
 
@@ -27,10 +28,6 @@ os.system('clear')
     # https://pokeapi.co/api/v2/pokemon
     # https://pokeapi.co/api/v2/pokemon/1/
 
-
-# url = "hello " + name + ", " , str(age)
-# url = f"hello {name}, {age}"    F-strings
-
 # create dictionary to hold character name and list of abilities
 # =>  eg: 'tentacool': ['clear-body', 'liquid-ooze', 'rain-dish']
 poke_abilities = {}
@@ -39,14 +36,12 @@ poke_abilities = {}
 # for this example test.
 for num in range(100):
     url = f"https://pokeapi.co/api/v2/pokemon/{num+1}/"   
-    # print(url)  
     response = requests.get(url)
     json_data = json.loads(response.text)
     name = json_data['forms'][0]['name'] # only one element in 'forms', so '0' hardcode
     poke_abilities[name] = []
 
     abilities = json_data['abilities'] # list of abilities(dicts) for current name/poke character.
-    # pprint(abilities)
     for ability in abilities:
         poke_abilities[name].append(ability['ability']['name'])
     
@@ -56,12 +51,117 @@ pprint(poke_abilities)
 
 
 
+############## OUTPUT FROM ABOVE CODE ################
+#  100 Characters and their list of abilities
+# {
+# 'abra': ['synchronize', 'inner-focus', 'magic-guard'],
+#  'alakazam': ['synchronize', 'inner-focus', 'magic-guard'],
+#  'arbok': ['intimidate', 'shed-skin', 'unnerve'],
+#  'arcanine': ['intimidate', 'flash-fire', 'justified'],
+#  'beedrill': ['swarm', 'sniper'],
+#  'bellsprout': ['chlorophyll', 'gluttony'],
+#  'blastoise': ['torrent', 'rain-dish'],
+#  'bulbasaur': ['overgrow', 'chlorophyll'],
+#  'butterfree': ['compound-eyes', 'tinted-lens'],
+#  'caterpie': ['shield-dust', 'run-away'],
+#  'charizard': ['blaze', 'solar-power'],
+#  'charmander': ['blaze', 'solar-power'],
+#  'charmeleon': ['blaze', 'solar-power'],
+#  'clefable': ['cute-charm', 'magic-guard', 'unaware'],
+#  'clefairy': ['cute-charm', 'magic-guard', 'friend-guard'],
+#  'cloyster': ['shell-armor', 'skill-link', 'overcoat'],
+#  'dewgong': ['thick-fat', 'hydration', 'ice-body'],
+#  'diglett': ['sand-veil', 'arena-trap', 'sand-force'],
+#  'dodrio': ['run-away', 'early-bird', 'tangled-feet'],
+#  'doduo': ['run-away', 'early-bird', 'tangled-feet'],
+#  'drowzee': ['insomnia', 'forewarn', 'inner-focus'],
+#  'dugtrio': ['sand-veil', 'arena-trap', 'sand-force'],
+#  'ekans': ['intimidate', 'shed-skin', 'unnerve'],
+#  'farfetchd': ['keen-eye', 'inner-focus', 'defiant'],
+#  'fearow': ['keen-eye', 'sniper'],
+#  'gastly': ['levitate'],
+#  'gengar': ['cursed-body'],
+#  'geodude': ['rock-head', 'sturdy', 'sand-veil'],
+#  'gloom': ['chlorophyll', 'stench'],
+#  'golbat': ['inner-focus', 'infiltrator'],
+#  'golduck': ['damp', 'cloud-nine', 'swift-swim'],
+#  'golem': ['rock-head', 'sturdy', 'sand-veil'],
+#  'graveler': ['rock-head', 'sturdy', 'sand-veil'],
+#  'grimer': ['stench', 'sticky-hold', 'poison-touch'],
+#  'growlithe': ['intimidate', 'flash-fire', 'justified'],
+#  'haunter': ['levitate'],
+#  'hypno': ['insomnia', 'forewarn', 'inner-focus'],
+#  'ivysaur': ['overgrow', 'chlorophyll'],
+#  'jigglypuff': ['cute-charm', 'competitive', 'friend-guard'],
+#  'kadabra': ['synchronize', 'inner-focus', 'magic-guard'],
+#  'kakuna': ['shed-skin'],
+#  'kingler': ['hyper-cutter', 'shell-armor', 'sheer-force'],
+#  'krabby': ['hyper-cutter', 'shell-armor', 'sheer-force'],
+#  'machamp': ['guts', 'no-guard', 'steadfast'],
+#  'machoke': ['guts', 'no-guard', 'steadfast'],
+#  'machop': ['guts', 'no-guard', 'steadfast'],
+#  'magnemite': ['magnet-pull', 'sturdy', 'analytic'],
+#  'magneton': ['magnet-pull', 'sturdy', 'analytic'],
+#  'mankey': ['vital-spirit', 'anger-point', 'defiant'],
+#  'meowth': ['pickup', 'technician', 'unnerve'],
+#  'metapod': ['shed-skin'],
+#  'muk': ['stench', 'sticky-hold', 'poison-touch'],
+#  'nidoking': ['poison-point', 'rivalry', 'sheer-force'],
+#  'nidoqueen': ['poison-point', 'rivalry', 'sheer-force'],
+#  'nidoran-f': ['poison-point', 'rivalry', 'hustle'],
+#  'nidoran-m': ['poison-point', 'rivalry', 'hustle'],
+#  'nidorina': ['poison-point', 'rivalry', 'hustle'],
+#  'nidorino': ['poison-point', 'rivalry', 'hustle'],
+#  'ninetales': ['flash-fire', 'drought'],
+#  'oddish': ['chlorophyll', 'run-away'],
+#  'onix': ['rock-head', 'sturdy', 'weak-armor'],
+#  'paras': ['effect-spore', 'dry-skin', 'damp'],
+#  'parasect': ['effect-spore', 'dry-skin', 'damp'],
+#  'persian': ['limber', 'technician', 'unnerve'],
+#  'pidgeot': ['keen-eye', 'tangled-feet', 'big-pecks'],
+#  'pidgeotto': ['keen-eye', 'tangled-feet', 'big-pecks'],
+#  'pidgey': ['keen-eye', 'tangled-feet', 'big-pecks'],
+#  'pikachu': ['static', 'lightning-rod'],
+#  'poliwag': ['water-absorb', 'damp', 'swift-swim'],
+#  'poliwhirl': ['water-absorb', 'damp', 'swift-swim'],
+#  'poliwrath': ['water-absorb', 'damp', 'swift-swim'],
+#  'ponyta': ['run-away', 'flash-fire', 'flame-body'],
+#  'primeape': ['vital-spirit', 'anger-point', 'defiant'],
+#  'psyduck': ['damp', 'cloud-nine', 'swift-swim'],
+#  'raichu': ['static', 'lightning-rod'],
+#  'rapidash': ['run-away', 'flash-fire', 'flame-body'],
+#  'raticate': ['run-away', 'guts', 'hustle'],
+#  'rattata': ['run-away', 'guts', 'hustle'],
+#  'sandshrew': ['sand-veil', 'sand-rush'],
+#  'sandslash': ['sand-veil', 'sand-rush'],
+#  'seel': ['thick-fat', 'hydration', 'ice-body'],
+#  'shellder': ['shell-armor', 'skill-link', 'overcoat'],
+#  'slowbro': ['oblivious', 'own-tempo', 'regenerator'],
+#  'slowpoke': ['oblivious', 'own-tempo', 'regenerator'],
+#  'spearow': ['keen-eye', 'sniper'],
+#  'squirtle': ['torrent', 'rain-dish'],
+#  'tentacool': ['clear-body', 'liquid-ooze', 'rain-dish'],
+#  'tentacruel': ['clear-body', 'liquid-ooze', 'rain-dish'],
+#  'venomoth': ['shield-dust', 'tinted-lens', 'wonder-skin'],
+#  'venonat': ['compound-eyes', 'tinted-lens', 'run-away'],
+#  'venusaur': ['overgrow', 'chlorophyll'],
+#  'victreebel': ['chlorophyll', 'gluttony'],
+#  'vileplume': ['chlorophyll', 'effect-spore'],
+#  'voltorb': ['soundproof', 'static', 'aftermath'],
+#  'vulpix': ['flash-fire', 'drought'],
+#  'wartortle': ['torrent', 'rain-dish'],
+#  'weedle': ['shield-dust', 'run-away'],
+#  'weepinbell': ['chlorophyll', 'gluttony'],
+#  'wigglytuff': ['cute-charm', 'competitive', 'frisk'],
+#  'zubat': ['inner-focus', 'infiltrator']
+# }
 
 
 
 
 
 
+###################### pseudo-code from lecture (Tyler) #####################
 
 #Assign response to variable
 
