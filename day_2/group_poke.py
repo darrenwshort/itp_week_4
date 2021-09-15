@@ -78,7 +78,7 @@ wb.save(outfile)
 
 
 
-############## OUTPUT FROM ABOVE CODE ################
+############## poke_abilities dictionary of first 100 poke characters ################
 #  100 Characters and their list of abilities
 # {
 # 'abra': ['synchronize', 'inner-focus', 'magic-guard'],
