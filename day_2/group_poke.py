@@ -12,7 +12,8 @@
     #json
     #openpyxl
 import os
-import openpyxl
+from openpyxl import Workbook
+from openpyxl.styles import Font
 import json
 import requests
 from pprint import pprint
@@ -47,6 +48,32 @@ for num in range(100):
 # "pretty-print" abilities dictionary.
 pprint(poke_abilities) 
     
+
+# write data to spreadsheet/workbook.
+wb = Workbook() # create workbook
+outfile = "pokemon.xlsx"  # specify output file
+sheet = wb.active  # assign active sheet to 'sheet' obj
+sheet.title = "Pokemon Abilities"
+
+# write column headers and set font properties.
+sheet['A1'] = "Character"
+sheet['A1'].font = Font(size="14", bold=True, italic=True, underline="single")
+sheet['B1'] = "Abilities"
+sheet['B1'].font = Font(size="14", bold=True, italic=True, underline="single")
+
+# TEST write to workbook
+# sheet['A2'] = "dodrio"
+# sheet.write('B2', ', '.join(poke_abilities['dodrio']))
+
+# loop through poke_abilities dict and write: 1) character name and 2) list of abilities
+row_num = 2
+for char_name in sorted(poke_abilities.keys()):
+    sheet['A' + str(row_num)] = char_name.capitalize()
+    sheet['B' + str(row_num)] = ', '.join(poke_abilities[char_name])
+    row_num += 1
+
+# save workbook/spreadsheet
+wb.save(outfile)
 
 
 
