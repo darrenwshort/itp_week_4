@@ -15,7 +15,6 @@ import os
 import openpyxl
 import json
 import requests
-from requests.api import request
 from pprint import pprint
 
 # clear output screen before each run.
