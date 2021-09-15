@@ -66,12 +66,24 @@ sheet['B1'].font = Font(size="14", bold=True, italic=True, underline="single")
 # sheet['A2'] = "dodrio"
 # sheet.write('B2', ', '.join(poke_abilities['dodrio']))
 
+
+# OPTION #1:  print 'name' in column A and entire list of abilities in column B.
 # loop through poke_abilities dict and write: 1) character name and 2) list of abilities
 row_num = 2
 for char_name in sorted(poke_abilities.keys()):
     sheet['A' + str(row_num)] = char_name.capitalize()
     sheet['B' + str(row_num)] = ', '.join(poke_abilities[char_name])
     row_num += 1
+
+# OPTION #2: print 'name' in column A and each ability in its own cell across multiple cols.
+# loop through list using following format => sheet.cell(column=col, row=row, value=val)
+#
+#       CODE GOES HERE...
+#
+# 
+
+
+
 
 # save workbook/spreadsheet
 wb.save(outfile)
