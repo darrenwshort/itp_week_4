@@ -81,7 +81,7 @@ pprint(poke_abilities)
 
 # write data to spreadsheet/workbook.
 wb = Workbook() # create workbook
-outfile = "pokemon.xlsx"  # specify output file
+outfile = "pokemon2.xlsx"  # specify output file
 sheet = wb.active  # assign active sheet to 'sheet' obj
 sheet.title = "Pokemon Abilities"
 

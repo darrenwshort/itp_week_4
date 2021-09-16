@@ -75,18 +75,10 @@ for char_name in sorted(poke_abilities.keys()):
     sheet['B' + str(row_num)] = ', '.join(poke_abilities[char_name])
     row_num += 1
 
-# OPTION #2: print 'name' in column A and each ability in its own cell across multiple cols.
-# loop through list using following format => sheet.cell(column=col, row=row, value=val)
-#
-#       CODE GOES HERE...
-#
-# 
-
-
-
-
 # save workbook/spreadsheet
 wb.save(outfile)
+
+
 
 
 
